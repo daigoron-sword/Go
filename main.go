@@ -436,17 +436,48 @@ import "fmt"
 // 	fmt.Println(a001.avg(80, 70))
 // }
 
-// 確認→結果○
-type User struct {
+// 確認問題→結果○
+// type User struct {
+// 	name string
+// }
+
+// func (u User) cal(weight, height float64) (result float64) {
+// 	result = weight / height / height * 10000
+// 	return
+// }
+
+// func main() {
+// 	a001 := User{"daichi"}
+// 	fmt.Println(a001.name, a001.cal(73, 172))
+// }
+
+type Student struct {
 	name string
 }
 
-func (u User) cal(weight, height float64) (result float64) {
-	result = weight / height / height * 10000
+func (s Student) CalAvg(data []float64) (avgResult float64) {
+	sum := 0.0
+	for i := 0; i < len(data); i++ {
+		sum += data[i]
+	}
+	avgResult = sum / float64(len(data))
+	return
+}
+
+func (s Student) judge(avg float64) (judgeResult string) {
+	if avg >= 60 {
+		judgeResult = "passed"
+	} else {
+		judgeResult = "failed"
+	}
 	return
 }
 
 func main() {
-	a001 := User{"daichi"}
-	fmt.Println(a001.name, a001.cal(73, 172))
+	a001 := Student{"sato"}
+	data := []float64{70, 65, 50, 10, 30}
+	var avg float64 = a001.CalAvg(data)
+	result := a001.judge(avg)
+	fmt.Println(avg)
+	fmt.Println(a001.name + " " + result)
 }
